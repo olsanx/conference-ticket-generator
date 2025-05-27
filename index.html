@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
+  <title>Frontend Mentor | Conference ticket generator</title>
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+  <header>
+    <img src="./assets/images/logo-full.svg" alt="coding conference logo">
+  </header>
+  <!-- Form starts -->
+  <main>
+    <section class="form-section">
+      <h1>Your Journey to Coding Conf 2025 Starts Here!</h1>
+      <p>Secure your spot at next year's biggest coding conference.</p>
+
+      <form action="#" id="form">
+        <div id="upload-pane">
+          <p class="uploadavatar-text">Upload Avatar</p>
+          <label for="upload-label" id="label">
+            <input type="file" id="upload-label" name="avatar" accept="image/png, image/jpg, image/jpeg"/>
+            <div id="upload-content">
+              <span class="img-container">
+                <img src="./assets/images/icon-upload.svg" alt="upload icon" id="upload-icon"/>
+                <img src="" alt="avatar" id="uploaded-img"/>
+              </span>
+              
+              <span class="btn-container">
+                <button class="remove-btn">Remove Image</button>
+                <button class="change-btn">Change Image</button>
+              </span>
+            </div>
+            <p class="drag-text">Drag and drop or click to upload</p>
+          </label>
+          <div class="guiding-text">
+            <div class="size-guiding">
+              <img src="./assets/images/icon-info.svg" alt="icon-info">
+              <small>Upload your photo (JPG or PNG, max size: 500KB).</small>
+            </div>
+            <div class="error-message">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16"><path stroke="red" stroke-linecap="round" stroke-linejoin="round" d="M2 8a6 6 0 1 0 12 0A6 6 0 0 0 2 8Z"/><path fill="#D1D0D5" d="M8.004 10.462V7.596ZM8 5.57v-.042Z"/><path stroke="red" stroke-linecap="round" stroke-linejoin="round" d="M8.004 10.462V7.596M8 5.569v-.042"/></svg>
+              <small>File is too large. Please upload a photo under 500KB</small>
+            </div>
+            <div class="error-message2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16"><path stroke="red" stroke-linecap="round" stroke-linejoin="round" d="M2 8a6 6 0 1 0 12 0A6 6 0 0 0 2 8Z"/><path fill="#D1D0D5" d="M8.004 10.462V7.596ZM8 5.57v-.042Z"/><path stroke="red" stroke-linecap="round" stroke-linejoin="round" d="M8.004 10.462V7.596M8 5.569v-.042"/></svg>
+              <small>You have not uploaded any image</small>
+            </div>
+          </div>
+        </div>
+
+        <label for="full-name">Full Name</label>
+        <input type="text" id="full-name" name="full-name">
+        <div class="error-warning">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16"><path stroke="#E16150" stroke-linecap="round" stroke-linejoin="round" d="M2 8a6 6 0 1 0 12 0A6 6 0 0 0 2 8Z"/><path fill="#E16150" d="M8.004 10.462V7.596ZM8 5.57v-.042Z"/><path stroke="#E16150" stroke-linecap="round" stroke-linejoin="round" d="M8.004 10.462V7.596M8 5.569v-.042"/></svg>
+        <small>Full name is required</small>
+        </div>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="example@email.com" name="email">
+        <div class="error-warning">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16"><path stroke="#E16150" stroke-linecap="round" stroke-linejoin="round" d="M2 8a6 6 0 1 0 12 0A6 6 0 0 0 2 8Z"/><path fill="#E16150" d="M8.004 10.462V7.596ZM8 5.57v-.042Z"/><path stroke="#E16150" stroke-linecap="round" stroke-linejoin="round" d="M8.004 10.462V7.596M8 5.569v-.042"/></svg>
+        <small>Please aenter a valid email address</small>
+        </div>
+
+        <label for="github-username">GitHub Username</label>
+        <input type="text" id="github-username" placeholder="@yourusername" name="github-username">
+        <div class="error-warning">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16"><path stroke="#E16150" stroke-linecap="round" stroke-linejoin="round" d="M2 8a6 6 0 1 0 12 0A6 6 0 0 0 2 8Z"/><path fill="#E16150" d="M8.004 10.462V7.596ZM8 5.57v-.042Z"/><path stroke="#E16150" stroke-linecap="round" stroke-linejoin="round" d="M8.004 10.462V7.596M8 5.569v-.042"/></svg>
+        <small>Username is required</small>
+        </div>
+        <button type="submit" id="submit-btn">Generate My Ticket</button>
+      </form>
+    </section>
+    <!-- Form ends -->
+
+    <!-- Generated tickets starts -->
+    <section class="section-two">
+      <h2>
+        Congrats, <span class="userName">Your Name</span>! Your ticket is ready.
+      </h2>
+
+      <p class="congrats">
+        We've emailed your ticket to <span class="userEmail">Youremail@email.com</span> and will send updates in the run up to the event.
+      </p>
+
+      <div class="ticket">
+        <img class="ticket-img" src="./assets/images/pattern-ticket.svg" alt="ticket">
+
+        <div class="ticket-details">
+          <div class="name-details">
+            <div class="logo">
+              <img src="./assets/images/logo-full.svg" alt="logo">
+            </div>
+            <p class="date"><span class="current">Jan 31, 2025</span> / Austin, TX</p>
+
+            <div class="personal">
+              <img class="avatar" src="./assets/images/image-avatar.jpg" alt="avatar">
+              <span class="info">
+                <p class="name">Jonatan Kristof</p>
+                <p class="github">
+                  <img src="./assets/images/icon-github.svg" alt="github-icon">@<span class="githubUserName">olsanx</span>
+                </p>
+              </span>
+            </div>
+          </div>
+          <div class="other-partition">
+            <p class="serial-number">#01609</p>
+          </div>
+        </div>
+      </div>
+    </section>
+ </main>
+ <script src="script.js"></script>
+  <!-- Generated tickets ends -->
+</body>
+</html>

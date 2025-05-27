@@ -1,0 +1,728 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ 
+:root {
+    --Neutral-0: hsl(0, 0%, 100%);
+    --Neutral-300: hsl(252, 6%, 83%);
+    --Neutral-500: hsl(245, 15%, 58%);
+    --Neutral-700: hsl(245, 19%, 35%);
+    --Neutral-800: hsla(245, 19%, 35%, 0.2);
+    --Neutral-800-low-op: hsla(245, 19%, 35%, 0.5);
+    --Neutral-900: hsl(248, 70%, 10%);
+
+    --Orange-400: rgb(238, 193, 187);
+    --Orange-500: hsl(7, 88%, 67%);
+    --Orange-700: hsl(7, 71%, 60%);
+
+    --Gradient-text: linear-gradient(to right, hsl(7, 86%, 67%), hsl(0, 0%, 100%));
+
+    --font-family: "Inconsolata", sans-serif;
+    --font-400: 400;
+    --font-500: 500;
+    --font-700: 700;
+    --font-800: 800;
+}
+
+body{
+    width: 100%;
+    min-height: 100vh;
+    font-family: var(--font-family);
+    font-size: 1.25rem;
+    background-image: url("../assets/images/pattern-circle.svg"),
+        url("../assets/images/pattern-lines.svg"),
+        url("../assets/images/pattern-squiggly-line-top.svg"),
+        url("../assets/images/pattern-circle.svg"),
+        url("../assets/images/pattern-squiggly-line-bottom-desktop.svg"),
+        url("../assets/images/background-desktop.png");
+    background-repeat: no-repeat;
+    background-position: top -11% left 3%, center, top 10% right, bottom 40% right 24%, bottom left, center;
+    background-size: 16.5%, cover, 32%, 15%, 60%, cover;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2.5rem;
+    color: var(--Neutral-0);
+}
+
+main {
+    max-width: 53.125rem;
+    margin: 1rem auto;
+    padding: 1rem;
+}
+
+.form-section{
+    display: block;
+    padding: 0 0.4rem;
+}
+
+h1 {
+    margin: 1.3rem 0;
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.1; 
+}
+
+p {
+    letter-spacing: 0.08rem;
+    color: var(--Neutral-300);
+}
+
+form {
+    max-width: 28rem;
+    margin: 2.5rem auto;
+}
+
+#upload-pane {
+    width: 100%;
+}
+
+.uploadavatar-text {
+    letter-spacing: 0.03px;
+    color: var(--Neutral-0);
+    text-align: left;
+    font-size: 1.1rem;
+}
+
+#label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 2px dashed var(--Neutral-700);
+    border-radius: 0.7rem;
+    background-color: var(--Neutral-800);
+    color: var(--Neutral-0);
+    width: 100%;
+    height: 100%;
+    font-weight: var(--font-400);
+    letter-spacing: 0.06rem;
+    padding: 1rem;
+    font-size: 1rem;
+    margin: .7rem auto;
+    transition: background-color 0.5s ease-in-out;
+}
+
+#label:focus {
+    outline: 5px solid var(--Neutral-700);
+}
+#label:hover{
+    background-color: var(--Neutral-700);
+}
+
+#upload-label {
+    display: none;
+}
+#upload-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-container {
+    background-color: var(--Neutral-800-low-op);
+    border: 1px solid var(--Neutral-800-low-op);
+    border-radius: .85rem;
+    padding: .6rem .5rem .4rem ;
+    display: flex;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem 0 1.2rem;
+}
+
+#upload-icon{
+    width: 30px;
+    height: 30px;
+}
+
+#uploaded-img {
+    display: none;
+    width: 60px;
+    height: 55px;
+    object-fit: cover;
+}
+
+.btn-container {
+    display: none;
+}
+
+button {
+    cursor: pointer;
+    background-color: var(--Neutral-800-low-op);
+    color: var(--Neutral-300);
+    border: none;
+    border-radius: .3rem;
+    padding: .4rem;
+    font-size: .75rem;
+    font-weight: var(--font-400);
+}
+
+
+.drag-text {
+    font-size: 1.13rem;
+    letter-spacing: 0;
+}
+
+.size-guiding {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: .9rem;
+    color: var(--Neutral-300);
+    margin-bottom: 1rem;
+}
+
+.error-message {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: .9rem;
+    color: var(--Orange-500);
+    display: none;
+}
+
+.error-message2 {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: .9rem;
+    color: var(--Orange-500);
+    display: none;
+}
+
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+  }
+  
+.shake {
+    animation: shake 0.4s ease;
+}
+
+label {
+    display: block;
+    text-align: left;
+    font-size: 1.1875rem;
+    margin-top: 1.7rem;
+    font-weight: var(--font-400);
+}
+
+input {
+    display: block;
+    width: 100%;
+    background-color: var(--Neutral-800);
+    border: 2px solid var(--Neutral-700);
+    border-radius: .7rem;
+    padding: 1rem;
+    margin-top: .8rem;
+    color: var(--Neutral-0);
+    font-size: 1.25rem;
+    transition: background-color 0.5s ease-in-out;
+    font-family: var(--font-family);
+}
+
+input:focus {
+    outline: 2px solid var(--Neutral-500);
+    border: 2px solid var(--Neutral-900);
+}
+input:hover{
+    background-color: var(--Neutral-700);
+}
+
+.error-warning {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: .9rem;
+    color: var(--Orange-700);
+    margin-top: .8rem;
+    display: none;
+}
+
+#submit-btn {
+    cursor: pointer;
+    background: var(--Orange-500);
+    color: var(--Neutral-900);
+    font-weight: var(--font-800);
+    border-radius: .7rem;
+    border: none;
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    margin-top: 1.5rem;
+    font-family: var(--font-family);
+}
+
+#submit-btn:hover {
+    border-bottom: 2px solid var(--Orange-400);
+}
+
+.section-two {
+    display: none;
+    padding: 0 0.4rem;
+}
+
+h2 {
+    margin: 1.3rem 0;
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.1; 
+}
+
+.userName {
+    background: var(--Gradient-text);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.congrats {
+    letter-spacing: 0.08rem;
+    color: var(--Neutral-300);
+    width: 30rem;
+    margin: 0 auto;
+    line-height: 25px;
+    margin-bottom: 5rem;
+}
+
+.userEmail {
+    color: var(--Orange-700);
+}
+
+.ticket {
+    width: 600px;
+    height: 280px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.ticket-details {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 600px;
+    height: 280px;
+    display: flex;
+}
+
+.name-details {
+    text-align: left;
+    width: 81%;
+    height: 100%;
+}
+
+.logo {
+    width: 17.25rem;
+    margin: 1.8rem 0 0.5rem 1.8rem;
+}
+
+.logo img {
+    width: 100%;
+}
+
+.avatar {
+   
+}
+
+.date {
+    margin-left: 5.8rem;
+    font-size: 1rem;
+    font-weight: var(--font-400);
+    color: var(--Neutral-300);
+}
+
+.personal {
+    display: flex;
+    margin: 5rem 0 0.5rem 1.5rem;
+}
+
+.personal img {
+    width: 5rem;
+    border-radius: .7rem;
+    margin-right: .7rem;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.name {
+    margin-top: .4rem;
+    font-size: 1.6rem;
+    color: var(--Neutral-0);
+}
+
+.github {
+    margin-top: .8rem;
+    margin-right: 6.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.github img {
+    width: 1.5rem;
+    margin-right: .5rem;
+}
+
+.other-partition {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.serial-number {
+    rotate: 90deg;
+    font-size: 1.7rem;
+    margin-left: .8rem;
+    color: var(--Neutral-500);
+}
+
+
+@media (max-width: 1024px) {
+    body {
+        background-image: 
+        url("../assets/images/pattern-circle.svg"),
+        url("../assets/images/pattern-lines.svg"),
+        url("../assets/images/pattern-squiggly-line-top.svg"),
+        url("../assets/images/pattern-circle.svg"),
+        url("../assets/images/pattern-squiggly-line-bottom-desktop.svg"),
+        url("../assets/images/background-desktop.png");
+    }
+
+    main {
+        width: 100%;
+        padding: 1rem;
+
+    }
+}
+
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 3rem;
+        line-height: 1; 
+    }
+}
+
+@media (max-width: 721px) {
+
+    .ticket,
+    .ticket-img,
+    .ticket-details {
+        width: 500px;
+        height: 240px;
+    }
+
+    .name-details {
+        text-align: left;
+        width: 78%;
+        height: 100%;
+    }
+
+    .logo {
+        width: 13.25rem;
+    }   
+
+    .date {
+        margin-left: 4.8rem;
+        font-size: .9rem;
+    }
+
+    .personal {
+        margin: 3rem 0 0.5rem 1.5rem;
+        width: 280px;
+        height: 60px;
+    }
+
+    .personal img {
+        width: 4rem;
+        border-radius: .6rem;
+        margin-right: .6rem;
+    }
+
+    .name {
+        margin: .8rem 2.5rem 0 0;
+        font-size: 1.2rem;
+    }
+
+    .github {
+        margin-top: .3rem;
+        font-size: 1rem;
+        width: 7rem;
+    }
+
+    .github img {
+        width: 1.2rem;
+    }
+
+    .serial-number {
+        font-size: 1.5rem;
+        margin-left: 1.3rem;
+    }
+
+}
+
+@media (max-width: 652px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .section-two h2 {
+        font-size: 2.5rem;
+    }
+
+    .congrats {
+        font-size: 1rem;
+        max-width: 25rem;
+        line-height: 19px;
+        margin-bottom: 2rem;
+    }
+
+    .ticket,
+    .ticket-img,
+    .ticket-details {
+        width: 380px;
+        height: 180px;
+    }
+
+    .name-details {
+        width: 80%;
+    }
+
+    .logo {
+        width: 9.25rem;
+    }   
+
+    .date {
+        margin-left: 3.6rem;
+        font-size: .8rem;
+    }
+
+    .personal {
+        margin: 2rem 0 0.5rem 1.5rem;
+        width: 250px;
+        height: 50px;
+    }
+
+    .personal img {
+        width: 4rem;
+        border-radius: .6rem;
+        margin-right: .6rem;
+    }
+
+    .name {
+        margin: .7rem 2rem 0 0;
+        font-size: 1.2rem;
+    }
+
+    .github {
+        margin-top: .3rem;
+        font-size: .8rem;
+        width: 7rem;
+    }
+
+    .github img {
+        width: 1rem;
+    }
+
+    .serial-number {
+        font-size: 1.2rem;
+        margin-left: .3rem;
+    }
+    
+}
+
+@media (max-width: 563px) {
+    body {
+        padding: .5rem;
+    }
+
+    main {
+        width: 100%;
+        margin: .3rem auto;
+        padding: .3rem;
+    }
+    
+    h1 {
+        max-width: 30rem;
+        margin: 1.2rem auto;
+    }
+    
+    p {
+        max-width: 30rem;
+        margin: 1.2rem auto;
+    }
+    
+    form {
+        max-width: 30rem;
+        margin: 2.5rem auto;
+    }
+}
+
+@media (max-width: 441px) {
+    .section-two h2 {
+        font-size: 2.5rem;
+        max-width: 20rem;
+        margin: 0 auto;
+    }
+
+    .congrats {
+        font-size: .8rem;
+        width: 18rem;
+        line-height: 19px;
+        margin: 2rem 0 3rem 2.5rem;
+    }
+
+    .ticket,
+    .ticket-img,
+    .ticket-details {
+        width: 380px;
+        height: 180px;
+    }
+
+    .name-details {
+        width: 80%;
+    }
+
+    .logo {
+        width: 9.25rem;
+    }   
+
+    .date {
+        margin-left: 3.6rem;
+        margin-top: 0;
+        font-size: .8rem;
+    }
+
+    .personal {
+        margin: 2rem 0 0.5rem 1.5rem;
+        width: 250px;
+        height: 50px;
+    }
+
+    .personal img {
+        width: 4rem;
+        border-radius: .6rem;
+        margin-right: .1rem;
+    }
+
+    .name {
+        margin: .7rem 2rem 0 0;
+        font-size: 1.2rem;
+    }
+
+    .github {
+        margin-top: .3rem;
+        font-size: .8rem;
+        width: 7rem;
+    }
+
+    .github img {
+        width: 1rem;
+    }
+
+    .serial-number {
+        font-size: 1.2rem;
+        margin-left: .3rem;
+    }
+    
+}
+
+@media (max-width: 417px) {
+    .section-two {
+        height: 100vh;
+    }
+
+    .section-two h2 {
+        margin: 1rem 2rem 2rem;
+    }
+    
+    .congrats {
+        width: 15rem;
+        line-height: 15px;
+        margin: 0 3rem 2rem;
+    }
+
+    .ticket,
+    .ticket-img,
+    .ticket-details {
+        width: 280px;
+        height: 120px;
+    }
+
+     .name-details {
+        width: 75%;
+    }
+
+    .logo {
+        width: 6.25rem;
+        margin: 1rem 0 1rem 2rem;
+    }   
+
+    .date {
+        margin-left: 2rem;
+        margin-top: -.9rem;
+        font-size: .6rem;
+    }
+
+    .personal {
+        margin: 1.2rem 0 0 1.8rem;
+        width: 250px;
+        height: 35px;
+    }
+
+    .personal img {
+        width: 4rem;
+        border-radius: .4rem;
+        margin-right: 0;
+    }
+
+    .name {
+        margin: .8rem 6rem 0 0;
+        font-size: .8rem;
+    }
+
+    .github {
+        margin-top: .3rem;
+    }
+
+    .github img {
+        width: .8rem;
+    }
+
+    .serial-number {
+        font-size: .9rem;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 320px) {
+    .congrats {
+        margin: 0 auto;
+    }
+
+    .ticket {
+        margin-top: 2rem;
+    }
+}
+
+
